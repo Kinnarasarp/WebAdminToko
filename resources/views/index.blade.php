@@ -1,6 +1,8 @@
 @extends('template.app')
 
-@section('title', 'Dashboard Admin')
+@section('dashboard_active', 'active')
+
+@section('title', 'Web Toko')
 
 @section('content')
   <div class="judul">

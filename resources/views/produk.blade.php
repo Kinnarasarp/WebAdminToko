@@ -18,9 +18,9 @@
           <tr>
             <th>Nama</th>
             <th>Client</th>
-            <th>Users</th>
+            {{-- <th>Users</th>
             <th>Status</th>
-            <th>Actions</th>
+            <th>Actions</th> --}}
           </tr>
         </thead>
         <tbody class="table-border-bottom-0">

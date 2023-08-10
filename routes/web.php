@@ -24,4 +24,6 @@ Route::get('/produk', [ProdukController::class, 'index'])->name('produk');
 Route::get('/produk/tambah', [ProdukController::class, 'create'])->name('produk-create');
 
 Route::get('/stok', [StokController::class, 'index'])->name('stok');
+Route::post('/stok/detail', [StokController::class, 'detail'])->name('stok_detail');
+
 Route::get('/penjualan', [PenjualanController::class, 'index'])->name('penjualan');

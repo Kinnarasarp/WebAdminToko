@@ -49,7 +49,7 @@
     <link rel="stylesheet" href="../assets/vendor/css/core.css" class="template-customizer-core-css" />
     <link rel="stylesheet" href="../assets/vendor/css/theme-default.css" class="template-customizer-theme-css" />
     <link rel="stylesheet" href="../assets/css/demo.css" />
-    <link rel="stylesheet" href="../assets/css/style.css">
+    {{-- <link rel="stylesheet" href="../assets/css/style.css"> --}}
 
     <!-- Vendors CSS -->
     <link rel="stylesheet" href="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
@@ -62,6 +62,8 @@
     <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="assets/js/config.js"></script>
+    <script src="assets/vendor/libs/jquery/jquery.js"></script>
+
   </head>
 
   <body>
@@ -152,12 +154,6 @@
                 <div data-i18n="Misc">Produk</div>
               </a>
             </li>
-            <li class="menu-item @yield('stok_active')">
-              <a href="{{ route('stok') }}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-box"></i>
-                <div data-i18n="User interface">Stok</div>
-              </a>
-            </li>
             <li class="menu-item @yield('penjualan_active')">
               <a href="{{ route('penjualan') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-file"></i>
@@ -206,7 +202,7 @@
             <div class="content-backdrop fade"></div>
           </div>
           <!-- Content wrapper -->
-
+        </div>
       <!-- Overlay -->
       <div class="layout-overlay layout-menu-toggle"></div>
     </div>
@@ -214,7 +210,6 @@
 
     <!-- Core JS -->
     <!-- build:js assets/vendor/js/core.js -->
-    <script src="assets/vendor/libs/jquery/jquery.js"></script>
     <script src="assets/vendor/libs/popper/popper.js"></script>
     <script src="assets/vendor/js/bootstrap.js"></script>
     <script src="assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>

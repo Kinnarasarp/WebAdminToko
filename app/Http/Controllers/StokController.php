@@ -13,4 +13,11 @@ class StokController extends Controller
     {
         return view('stok');
     }
+
+    function detail(Request $request)
+    {
+        $array_produks = json_decode($request->produk_array);
+
+        return view("penjualan", compact('array_produks'));
+    }
 }
