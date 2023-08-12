@@ -14,7 +14,7 @@ class ProdukController extends Controller
     public function index()
     {
         $produk = Produk::all(); // Ambil data produk dari database
-        $produk = Produk::paginate(5); 
+        $produk = Produk::paginate(5);
         return view('produk', compact('produk')); // Menggunakan 'produk' bukan 'produks'
     }
 
@@ -53,9 +53,28 @@ class ProdukController extends Controller
 
     public function update(Request $request, $id)
     {
-        // Lakukan validasi input dan update data di database
-        // Redirect kembali ke halaman produk index atau show
+        $request->validate([
+            'nama' => 'required|max:255',
+            'satuan' => 'required|max:50',
+            'harga' => 'required|numeric|min:0',
+            'status' => 'required|in:0,1',
+        ]);
+
+        $produk = Produk::find($id);
+
+        if (!$produk) {
+            return redirect()->route('produk')->with('error', 'Produk tidak ditemukan');
+        }
+
+        $produk->nama = $request->nama;
+        $produk->satuan = $request->satuan;
+        $produk->harga = $request->harga;
+        $produk->status = $request->status;
+        $produk->save();
+
+        return redirect()->route('produk')->with('success', 'Data produk berhasil diperbarui');
     }
+
 
     public function destroy($id)
     {
