@@ -26,16 +26,14 @@ class ProdukController extends Controller
 
     public function store(Request $request)
     {
-        // Lakukan validasi input, contoh:
-        $validatedData = $request->validate([
+        $this->validate($request, [
             'nama' => 'required',
-            'satuan' => 'required',
-            'harga' => 'required|numeric',
-            'status' => 'required',
+            'stok' => 'required',
+            'harga_beli' => 'required|numeric',
+            'harga_jual' => 'required|numeric',
         ]);
-
-        Produk::create($validatedData); // Simpan data ke database
-        return redirect()->route('produk'); // Redirect kembali ke halaman produk index
+        Produk::create($request->all());
+        return redirect()->route('produk')->with('success', 'Produk Berhasil Ditambahkan!');
     }
 
 
@@ -55,9 +53,9 @@ class ProdukController extends Controller
     {
         $request->validate([
             'nama' => 'required|max:255',
-            'satuan' => 'required|max:50',
-            'harga' => 'required|numeric|min:0',
-            'status' => 'required|in:0,1',
+            'stok' => 'required|max:50',
+            'harga_beli' => 'required|numeric|min:0',
+            'harga_jual' => 'required|numeric|min:0',
         ]);
 
         $produk = Produk::find($id);
@@ -67,9 +65,9 @@ class ProdukController extends Controller
         }
 
         $produk->nama = $request->nama;
-        $produk->satuan = $request->satuan;
-        $produk->harga = $request->harga;
-        $produk->status = $request->status;
+        $produk->stok = $request->stok;
+        $produk->harga_beli = $request->harga_beli;
+        $produk->harga_jual = $request->harga_jual;
         $produk->save();
 
         return redirect()->route('produk')->with('success', 'Data produk berhasil diperbarui');
