@@ -5,67 +5,59 @@
 @section('produk_active', 'active')
 
 @section('content')
-  <div class="my-2">
-    <a href="{{ route('produk') }}" class="text-decoration-none text-black">
-      <div class="back-button d-flex align-items-center">
-        <i class='bx bx-chevron-left'></i>
-        <p class="m-0">Back</p>
+<div class="my-2">
+  <a href="{{ route('produk') }}" class="text-decoration-none text-black">
+    <div class="back-button d-flex align-items-center">
+      <i class='bx bx-chevron-left'></i>
+      <p class="m-0">Back</p>
+    </div>
+  </a>
+</div>
+<div class="row">
+  <div class="col-xxl">
+    <div class="card mb-4">
+      <div class="card-header d-flex align-items-center justify-content-between">
+        <h5 class="mb-0">Tambah Produk</h5>
       </div>
-    </a>
-  </div>
-  <div class="row">
-    <div class="col-xxl">
-      <div class="card mb-4">
-        <div class="card-header d-flex align-items-center justify-content-between">
-          <h5 class="mb-0">Tambah Produk</h5>
-        </div>
-        <div class="card-body">
-          <form>
-            <div class="row mb-3">
-              <label class="col-sm-2 col-form-label" for="basic-default-name">Name</label>
-              <div class="col-sm-10">
-                <input type="text" class="form-control" id="basic-default-name" placeholder="John Doe">
-              </div>
+      <div class="card-body">
+        <form action="{{ route('produk-store') }}" method="POST">
+          @csrf
+          <div class="row mb-3">
+            <label class="col-sm-2 col-form-label" for="nama">Nama</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="nama" name="nama" placeholder="Contoh : Tepung Terigu">
             </div>
-            <div class="row mb-3">
-              <label class="col-sm-2 col-form-label" for="basic-default-company">Company</label>
-              <div class="col-sm-10">
-                <input type="text" class="form-control" id="basic-default-company" placeholder="ACME Inc.">
-              </div>
+          </div>
+          <div class="row mb-3">
+            <label class="col-sm-2 col-form-label" for="satuan">Satuan</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="satuan" name="satuan" placeholder="Contoh : 3">
             </div>
-            <div class="row mb-3">
-              <label class="col-sm-2 col-form-label" for="basic-default-email">Email</label>
-              <div class="col-sm-10">
-                <div class="input-group input-group-merge">
-                  <input type="text" id="basic-default-email" class="form-control" placeholder="john.doe"
-                    aria-label="john.doe" aria-describedby="basic-default-email2">
-                  <span class="input-group-text" id="basic-default-email2">@example.com</span>
-                </div>
-                <div class="form-text">You can use letters, numbers &amp; periods</div>
-              </div>
+          </div>
+          <div class="row mb-3">
+            <label class="col-sm-2 col-form-label" for="harga">Harga</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="harga" name="harga" placeholder="Contoh : 5000">
             </div>
+          </div>
+        
             <div class="row mb-3">
-              <label class="col-sm-2 col-form-label" for="basic-default-phone">Phone No</label>
+              <label class="col-sm-2 col-form-label" for="status">Status</label>
               <div class="col-sm-10">
-                <input type="text" id="basic-default-phone" class="form-control phone-mask" placeholder="658 799 8941"
-                  aria-label="658 799 8941" aria-describedby="basic-default-phone">
-              </div>
-            </div>
-            <div class="row mb-3">
-              <label class="col-sm-2 col-form-label" for="basic-default-message">Message</label>
-              <div class="col-sm-10">
-                <textarea id="basic-default-message" class="form-control" placeholder="Hi, Do you have a moment to talk Joe?"
-                  aria-label="Hi, Do you have a moment to talk Joe?" aria-describedby="basic-icon-default-message2"></textarea>
+                <select class="form-control" id="status" name="status">
+                  <option value="1">Active</option>
+                  <option value="0">Inactive</option>
+                </select>
               </div>
             </div>
             <div class="row justify-content-end">
               <div class="col-sm-10">
-                <button type="submit" class="btn btn-primary">Send</button>
+                <button type="submit" class="btn btn-primary">Simpan</button>
               </div>
             </div>
-          </form>
-        </div>
+        </form>
       </div>
     </div>
   </div>
+</div>
 @endsection

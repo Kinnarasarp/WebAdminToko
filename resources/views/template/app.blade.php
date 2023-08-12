@@ -63,7 +63,14 @@
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="assets/js/config.js"></script>
     <script src="assets/vendor/libs/jquery/jquery.js"></script>
+<style>
+  .btn-custom-orange {
+    background-color: orange;
+    border-color: orange;
+    color: white;
+}
 
+</style>
   </head>
 
   <body>

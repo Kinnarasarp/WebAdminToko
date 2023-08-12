@@ -22,6 +22,12 @@ Route::get('/', [HomeController::class, 'index'])->name('dashboard');
 //produk
 Route::get('/produk', [ProdukController::class, 'index'])->name('produk');
 Route::get('/produk/tambah', [ProdukController::class, 'create'])->name('produk-create');
+Route::post('/produk/store', [ProdukController::class, 'store'])->name('produk-store');
+Route::get('/produk/{id}', [ProdukController::class, 'show'])->name('produk-show');
+Route::get('/produk/{id}/edit', [ProdukController::class, 'edit'])->name('produk-edit');
+Route::put('/produk/{id}/update', [ProdukController::class, 'update'])->name('produk-update');
+Route::delete('/produk/{id}/destroy', [ProdukController::class, 'destroy'])->name('produk-destroy');
+
 
 Route::get('/stok', [StokController::class, 'index'])->name('stok');
 Route::post('/stok/detail', [StokController::class, 'detail'])->name('stok_detail');
