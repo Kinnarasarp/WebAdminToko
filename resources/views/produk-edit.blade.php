@@ -2,8 +2,6 @@
 
 @section('title', 'Edit Produk')
 
-@section('produk_active', 'active')
-
 @section('content')
 <div class="my-2">
   <a href="{{ route('produk') }}" class="text-decoration-none text-black">
@@ -20,34 +18,54 @@
         <h5 class="mb-0">Edit Produk</h5>
       </div>
       <div class="card-body">
+        @if ($errors->any())
+        <div class="alert alert-danger alert-dismissible" role="alert">
+          <b>Input</b> Salah!
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        @endif
         <form action="{{ route('produk-update', $produk->id) }}" method="POST">
           @csrf
-          @method('PUT') <!-- Gunakan method PUT untuk update data -->
-          <div class="mb-3">
-            <label for="nama" class="form-label">Nama</label>
-            <input type="text" class="form-control" id="nama" name="nama" placeholder="Nama Produk"
-              value="{{ $produk->nama }}">
+          @method('PUT')
+        <div class="row mb-3">
+          <label class="col-sm-2 col-form-label" for="nama">Nama</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="nama" name="nama" placeholder="Contoh : Tepung Terigu" value="{{ $produk->nama }}">
           </div>
-          <div class="mb-3">
-            <label for="satuan" class="form-label">Satuan</label>
-            <input type="text" class="form-control" id="satuan" name="satuan" placeholder="Satuan Produk"
-              value="{{ $produk->satuan }}">
+        </div>
+        <div class="row mb-3">
+          <label class="col-sm-2 col-form-label" for="stok">Stok</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="stok" name="stok" placeholder="Contoh : 3" value="{{ $produk->stok }}">
           </div>
-          <div class="mb-3">
-            <label for="harga" class="form-label">Harga</label>
-            <input type="text" class="form-control" id="harga" name="harga" placeholder="Harga Produk"
-              value="{{ $produk->harga }}">
-          </div>
-          <div class="mb-3">
-            <label for="status" class="form-label">Status</label>
-            <select class="form-select" id="status" name="status">
-              <option value="1" {{ $produk->status == 1 ? 'selected' : '' }}>Active</option>
-              <option value="0" {{ $produk->status == 0 ? 'selected' : '' }}>Inactive</option>
+        </div>
+        <div class="row mb-3">
+          <label for="defaultSelect" class="col-2 col-form-label">Satuan</label>
+          <div class="col-10">
+            <select id="defaultSelect" class="form-select" name="satuan">
+              <option value="liter" {{ $produk->satuan == 'liter' ? 'selected' : '' }}>Liter</option>
+              <option value="kg" {{ $produk->satuan == 'kg' ? 'selected' : '' }}>Kg</option>
+              <option value="pcs" {{ $produk->satuan == 'pcs' ? 'selected' : '' }}>Pcs</option>
             </select>
           </div>
-          <div class="text-end">
+        </div>
+        <div class="row mb-3">
+          <label class="col-sm-2 col-form-label" for="harga_beli">Harga Beli</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="harga_beli" name="harga_beli" placeholder="Contoh : 5000" value="{{ $produk->harga_beli }}">
+          </div>
+        </div>
+        <div class="row mb-3">
+          <label class="col-sm-2 col-form-label" for="harga_jual">Harga Jual</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="harga_jual" name="harga_jual" placeholder="Contoh : 7000" value="{{ $produk->harga_jual }}">
+          </div>
+        </div>
+        <div class="row justify-content-end">
+          <div class="col-sm-10">
             <button type="submit" class="btn btn-primary">Update</button>
           </div>
+        </div>
         </form>
       </div>
     </div>

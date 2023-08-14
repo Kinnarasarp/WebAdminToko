@@ -18,7 +18,6 @@ class ProdukController extends Controller
         return view('produk', compact('produk')); // Menggunakan 'produk' bukan 'produks'
     }
 
-
     public function create()
     {
         return view('produk-tambah');
@@ -36,10 +35,13 @@ class ProdukController extends Controller
         return redirect()->route('produk')->with('success', 'Produk Berhasil Ditambahkan!');
     }
 
-
     public function show($id)
     {
         $produk = Produk::find($id);
+
+        if (!$produk) {
+            return redirect()->route('produk')->with('error', 'Produk tidak ditemukan.');
+        }
         return view('produk-detail', compact('produk'));
     }
 
@@ -51,29 +53,27 @@ class ProdukController extends Controller
 
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'nama' => 'required|max:255',
-            'stok' => 'required|max:50',
-            'harga_beli' => 'required|numeric|min:0',
-            'harga_jual' => 'required|numeric|min:0',
+        $this->validate($request, [
+            'nama' => 'required',
+            'stok' => 'required',
+            'harga_beli' => 'required|numeric',
+            'harga_jual' => 'required|numeric',
         ]);
-
+    
         $produk = Produk::find($id);
-
+    
         if (!$produk) {
-            return redirect()->route('produk')->with('error', 'Produk tidak ditemukan');
+            return redirect()->route('produk')->with('error', 'Produk tidak ditemukan.');
         }
-
-        $produk->nama = $request->nama;
-        $produk->stok = $request->stok;
-        $produk->harga_beli = $request->harga_beli;
-        $produk->harga_jual = $request->harga_jual;
-        $produk->save();
-
-        return redirect()->route('produk')->with('success', 'Data produk berhasil diperbarui');
+    
+        // Dump the actual data values
+        dump($produk->toArray());
+    
+        $produk->update($request->all());
+    
+        return redirect()->route('produk')->with('success', 'Produk berhasil diupdate!');
     }
-
-
+    
     public function destroy($id)
     {
         $produk = Produk::find($id);

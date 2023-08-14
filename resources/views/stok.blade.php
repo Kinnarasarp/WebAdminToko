@@ -11,9 +11,6 @@
 
   <script>
     // console.log("ayam")
-
-
-
     var array_produk = [];
 
     function add_array(id) {
@@ -22,8 +19,6 @@
         $("#produk_array").val(JSON.stringify(array_produk));
       });
     }
-
-
     // console.log(produk_array);
   </script>
 @endsection

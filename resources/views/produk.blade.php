@@ -38,32 +38,33 @@
             </tr>
           </thead>
           <tbody class="table-border-bottom-0">
-            @foreach ($produk as $item)
-              <tr>
-                <td>{{ $item->nama }}</td>
-                <td>{{ $item->stok }} pcs</td>
-                <td>@currency($item->harga_beli)</td>
-                <td>@currency($item->harga_jual)</td>
-                <td>
-                  @if ($item->stok == 0)
-                    <span class="badge bg-label-danger">Habis</span>
-                  @elseif($item->stok < 5)
-                    <span class="badge bg-label-warning">Menipis</span>
-                  @else
-                    <span class="badge bg-label-success">Tersedia</span>
-                  @endif
-                </td>
-                <td>
-                  <a href="{{ route('produk-show', $item->id) }}" class="btn btn-md btn-info">Detail</a>
-                  <a href="{{ route('produk-edit', $item->id) }}" class="btn btn-md btn-warning">Edit</a>
-                  <form action="{{ route('produk-destroy', $item->id) }}" method="POST" class="d-inline">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="btn btn-md btn-danger">Delete</button>
-                  </form>
-                </td>
-              </tr>
-            @endforeach
+          @foreach ($produk as $item)
+    <tr>
+        <td>{{ $item->nama }}</td>
+        <td>{{ $item->stok }} {{ $item->satuan }}</td>
+        <td>@currency($item->harga_beli)</td>
+        <td>@currency($item->harga_jual)</td>
+        <td>
+            @if ($item->stok == 0)
+                <span class="badge bg-label-danger">Habis</span>
+            @elseif($item->stok < 5)
+                <span class="badge bg-label-warning">Menipis</span>
+            @else
+                <span class="badge bg-label-success">Tersedia</span>
+            @endif
+        </td>
+        <td>
+            <a href="{{ route('produk-show', $item->id) }}" class="btn btn-md btn-info">Detail</a>
+            <a href="{{ route('produk-edit', $item->id) }}" class="btn btn-md btn-warning">Edit</a>
+            <form action="{{ route('produk-destroy', $item->id) }}" method="POST" class="d-inline">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="btn btn-md btn-danger">Delete</button>
+            </form>
+        </td>
+    </tr>
+@endforeach
+
           </tbody>
         </table>
       </div>

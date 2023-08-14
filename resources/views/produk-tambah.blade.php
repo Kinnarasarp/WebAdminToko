@@ -36,7 +36,7 @@
               </div>
             </div>
             <div class="row mb-3">
-              <label class="col-sm-2 col-form-label" for="stok">Stok / pcs</label>
+              <label class="col-sm-2 col-form-label" for="stok">Stok</label>
               <div class="col-sm-10">
                 <input type="text" class="form-control" id="stok" name="stok" placeholder="Contoh : 3">
               </div>
