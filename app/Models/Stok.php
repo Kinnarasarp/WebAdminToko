@@ -13,9 +13,4 @@ class Stok extends Model
         'jumlah',
         'produk_id'
     ];
-
-    public function produk()
-    {
-        return $this->belongsTo(Produk::class);
-    }
 }

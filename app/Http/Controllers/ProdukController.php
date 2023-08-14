@@ -18,7 +18,6 @@ class ProdukController extends Controller
         return view('produk', compact('produk')); // Menggunakan 'produk' bukan 'produks'
     }
 
-
     public function create()
     {
         return view('produk-tambah');
@@ -26,22 +25,23 @@ class ProdukController extends Controller
 
     public function store(Request $request)
     {
-        // Lakukan validasi input, contoh:
-        $validatedData = $request->validate([
+        $this->validate($request, [
             'nama' => 'required',
-            'satuan' => 'required',
-            'harga' => 'required|numeric',
-            'status' => 'required',
+            'stok' => 'required',
+            'harga_beli' => 'required|numeric',
+            'harga_jual' => 'required|numeric',
         ]);
-
-        Produk::create($validatedData); // Simpan data ke database
-        return redirect()->route('produk'); // Redirect kembali ke halaman produk index
+        Produk::create($request->all());
+        return redirect()->route('produk')->with('success', 'Produk Berhasil Ditambahkan!');
     }
-
 
     public function show($id)
     {
         $produk = Produk::find($id);
+
+        if (!$produk) {
+            return redirect()->route('produk')->with('error', 'Produk tidak ditemukan.');
+        }
         return view('produk-detail', compact('produk'));
     }
 
@@ -53,29 +53,27 @@ class ProdukController extends Controller
 
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'nama' => 'required|max:255',
-            'satuan' => 'required|max:50',
-            'harga' => 'required|numeric|min:0',
-            'status' => 'required|in:0,1',
+        $this->validate($request, [
+            'nama' => 'required',
+            'stok' => 'required',
+            'harga_beli' => 'required|numeric',
+            'harga_jual' => 'required|numeric',
         ]);
-
+    
         $produk = Produk::find($id);
-
+    
         if (!$produk) {
-            return redirect()->route('produk')->with('error', 'Produk tidak ditemukan');
+            return redirect()->route('produk')->with('error', 'Produk tidak ditemukan.');
         }
-
-        $produk->nama = $request->nama;
-        $produk->satuan = $request->satuan;
-        $produk->harga = $request->harga;
-        $produk->status = $request->status;
-        $produk->save();
-
-        return redirect()->route('produk')->with('success', 'Data produk berhasil diperbarui');
+    
+        // Dump the actual data values
+        dump($produk->toArray());
+    
+        $produk->update($request->all());
+    
+        return redirect()->route('produk')->with('success', 'Produk berhasil diupdate!');
     }
-
-
+    
     public function destroy($id)
     {
         $produk = Produk::find($id);
