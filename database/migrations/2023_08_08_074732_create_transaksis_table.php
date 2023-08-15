@@ -1,8 +1,11 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
+use App\Models\Produk;
+use App\Models\Penjualan;
+use App\Models\Transaksi;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
 return new class extends Migration
 {
@@ -13,8 +16,8 @@ return new class extends Migration
     {
         Schema::create('transaksis', function (Blueprint $table) {
             $table->id();
-            $table->string('produk_id');
-            $table->bigInteger('no_order_penjualan');
+            $table->foreignIdFor(Produk::class);
+            $table->foreignIdFor(Penjualan::class);
             $table->integer('quantity');
             $table->integer('harga');
             $table->integer('keuntungan');

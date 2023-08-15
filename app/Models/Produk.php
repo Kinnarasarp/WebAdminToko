@@ -12,7 +12,13 @@ class Produk extends Model
     protected $fillable = [
         'nama',
         'stok',
+        'satuan',
         'harga_beli',
         'harga_jual'
     ];
+
+    public function penjualan()
+    {
+        return $this->belongsToMany(Penjualan::class, 'penjualans', 'no_order');
+    }
 }

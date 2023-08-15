@@ -46,9 +46,9 @@
               <div class="col-10">
                 <select id="defaultSelect" class="form-select" name="satuan">
                   <option selected="true" disabled="disabled">~~Pilih Satuan~~</option>
-                  <option value="liter">Liter</option>
-                  <option value="kg">Kg</option>
-                  <option value="pcs">Pcs</option>
+                  <option value="liter">liter</option>
+                  <option value="kg">kg</option>
+                  <option value="pcs">pcs</option>
                 </select>
               </div>
             </div>
