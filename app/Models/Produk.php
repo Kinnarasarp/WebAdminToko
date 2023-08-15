@@ -16,4 +16,9 @@ class Produk extends Model
         'harga_beli',
         'harga_jual'
     ];
+
+    public function penjualan()
+    {
+        return $this->belongsToMany(Penjualan::class, 'penjualans', 'no_order');
+    }
 }

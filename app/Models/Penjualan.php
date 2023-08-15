@@ -10,4 +10,9 @@ class Penjualan extends Model
     use HasFactory;
 
     protected $guarded = [];
+
+    public function produk()
+    {
+        return $this->belongsToMany(Produk::class, 'produks', 'id');
+    }
 }

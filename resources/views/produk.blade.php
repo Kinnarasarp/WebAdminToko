@@ -4,8 +4,6 @@
 
 @section('produk_active', 'active')
 
-{{-- @section('css') --}}
-
 @section('content')
   <style>
     th,

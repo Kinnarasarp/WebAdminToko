@@ -14,7 +14,6 @@ class ProdukController extends Controller
     public function index()
     {
         $produk = Produk::all(); // Ambil data produk dari database
-        $produk = Produk::paginate(5);
         return view('produk', compact('produk')); // Menggunakan 'produk' bukan 'produks'
     }
 
@@ -59,21 +58,18 @@ class ProdukController extends Controller
             'harga_beli' => 'required|numeric',
             'harga_jual' => 'required|numeric',
         ]);
-    
+
         $produk = Produk::find($id);
-    
+
         if (!$produk) {
             return redirect()->route('produk')->with('error', 'Produk tidak ditemukan.');
         }
-    
-        // Dump the actual data values
-        dump($produk->toArray());
-    
+
         $produk->update($request->all());
-    
+
         return redirect()->route('produk')->with('success', 'Produk berhasil diupdate!');
     }
-    
+
     public function destroy($id)
     {
         $produk = Produk::find($id);
