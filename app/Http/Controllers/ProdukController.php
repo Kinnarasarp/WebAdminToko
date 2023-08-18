@@ -15,6 +15,7 @@ class ProdukController extends Controller
     {
         $produk = Produk::all(); // Ambil data produk dari database
         return view('produk', compact('produk')); // Menggunakan 'produk' bukan 'produks'
+        
     }
 
     public function create()

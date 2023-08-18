@@ -11,6 +11,12 @@ class PenjualanController extends Controller
     public function index()
     {
         $produk = Produk::where('stok', '>', '0')->get(); // Retrieve all products from the database
+        // dd($produk);
         return view('penjualan', compact('produk'));
+    }
+    
+    public function cart(Request $request){
+        $array_produks = json_decode($request->produk_array);
+        return view("cart", compact('array_produks'));
     }
 }

@@ -28,8 +28,8 @@ Route::get('/produk/{id}/edit', [ProdukController::class, 'edit'])->name('produk
 Route::put('/produk/{id}/update', [ProdukController::class, 'update'])->name('produk-update');
 Route::delete('/produk/{id}/destroy', [ProdukController::class, 'destroy'])->name('produk-destroy');
 
-
 Route::get('/stok', [StokController::class, 'index'])->name('stok');
 Route::post('/stok/detail', [StokController::class, 'detail'])->name('stok_detail');
 
 Route::get('/penjualan', [PenjualanController::class, 'index'])->name('penjualan');
+Route::post('/penjualan/cart', [PenjualanController::class, 'cart'])->name('cart');
