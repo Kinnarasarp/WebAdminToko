@@ -31,7 +31,7 @@
               </tr>
             </thead>
             <tbody>
-              @foreach ($produk_array as $id)
+              @foreach ($produk_array as $item)
                 @php
                   $item = App\Models\Produk::find($id);
                   $subtotal = $item->harga_jual;
