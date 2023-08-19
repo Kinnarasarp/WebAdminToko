@@ -6,6 +6,7 @@ use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\StokController;
 use Illuminate\Support\Facades\Route;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -31,5 +32,10 @@ Route::delete('/produk/{id}/destroy', [ProdukController::class, 'destroy'])->nam
 Route::get('/stok', [StokController::class, 'index'])->name('stok');
 Route::post('/stok/detail', [StokController::class, 'detail'])->name('stok_detail');
 
+
 Route::get('/penjualan', [PenjualanController::class, 'index'])->name('penjualan');
 Route::post('/penjualan/cart', [PenjualanController::class, 'cart'])->name('cart');
+Route::post('/prosesCheckout', [PenjualanController::class, 'prosesCheckout'])->name('prosesCheckout');
+// Route::post('/prosesCheckout/tambah', [PenjualanController::class, 'prosesCheckoutTambah'])->name('prosesCheckoutTambah'); // Fix the route name and method
+Route::post('/cart/konfirmasi', [PenjualanController::class, 'konfirmasiCheckout'])->name('cart.konfirmasi');
+Route::post('/uploadToPenjualan', [PenjualanController::class, 'uploadToPenjualan'])->name('uploadToPenjualan');

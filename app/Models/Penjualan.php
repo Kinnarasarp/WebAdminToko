@@ -10,6 +10,8 @@ class Penjualan extends Model
     use HasFactory;
 
     protected $guarded = [];
+    protected $primaryKey = 'no_order';
+    public $incrementing = false;
 
     public function produk()
     {

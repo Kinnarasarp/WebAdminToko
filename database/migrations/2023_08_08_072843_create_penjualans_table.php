@@ -12,8 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('penjualans', function (Blueprint $table) {
-            $table->id('no_order');
-            $table->integer('grand_total');
+            $table->id(); // Ubah menjadi auto_increment primary key
+            $table->integer('no_order')->unique();
+            $table->integer('grand_total')->nullable();
             $table->timestamps();
         });
     }
