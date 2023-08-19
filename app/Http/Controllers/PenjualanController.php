@@ -14,9 +14,14 @@ class PenjualanController extends Controller
         // dd($produk);
         return view('penjualan', compact('produk'));
     }
-    
-    public function cart(Request $request){
-        $array_produks = json_decode($request->produk_array);
-        return view("cart", compact('array_produks'));
+
+    public function cart(Request $request)
+    {
+        if (isset($request->produk_array)) {
+            $array_produks = json_decode($request->produk_array);
+            return view("cart", compact('array_produks'));
+        } else {
+            return redirect()->route('penjualan')->with('error', 'Pilih Salah Satu Produk !');
+        }
     }
 }
