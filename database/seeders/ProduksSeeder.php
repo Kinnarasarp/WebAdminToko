@@ -2,8 +2,10 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
 class ProduksSeeder extends Seeder
 {
     public function run(): void
@@ -26,17 +28,17 @@ class ProduksSeeder extends Seeder
                 [
                     'id' => 4,
                     'nama' => 'POP ICE',
-                    
+
                 ],
                 [
                     'id' => 5,
                     'nama' => 'Milo',
-                    
+
                 ],
                 [
                     'id' => 6,
                     'nama' => 'Teajus',
-                    
+
                 ]
             ];
 
@@ -47,8 +49,7 @@ class ProduksSeeder extends Seeder
             }
 
             $lastId = DB::table('produks')->orderBy('id', 'desc')->first();
-            if(!empty($lastId))
-            {
+            if (!empty($lastId)) {
                 $newLastId = $lastId->id + 1;
                 DB::update(DB::raw("ALTER SEQUENCE produks_id_seq RESTART WITH {$newLastId}"));
             }
