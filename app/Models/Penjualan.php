@@ -11,7 +11,6 @@ class Penjualan extends Model
 
     protected $guarded = [];
     protected $primaryKey = 'no_order';
-    public $incrementing = false;
 
     public function produk()
     {

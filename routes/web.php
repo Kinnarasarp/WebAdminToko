@@ -24,18 +24,11 @@ Route::get('/', [HomeController::class, 'index'])->name('dashboard');
 Route::get('/produk', [ProdukController::class, 'index'])->name('produk');
 Route::get('/produk/tambah', [ProdukController::class, 'create'])->name('produk-create');
 Route::post('/produk/store', [ProdukController::class, 'store'])->name('produk-store');
-Route::get('/produk/{id}', [ProdukController::class, 'show'])->name('produk-show');
 Route::get('/produk/{id}/edit', [ProdukController::class, 'edit'])->name('produk-edit');
 Route::put('/produk/{id}/update', [ProdukController::class, 'update'])->name('produk-update');
 Route::delete('/produk/{id}/destroy', [ProdukController::class, 'destroy'])->name('produk-destroy');
 
-Route::get('/stok', [StokController::class, 'index'])->name('stok');
-Route::post('/stok/detail', [StokController::class, 'detail'])->name('stok_detail');
-
-
 Route::get('/penjualan', [PenjualanController::class, 'index'])->name('penjualan');
 Route::post('/penjualan/cart', [PenjualanController::class, 'cart'])->name('cart');
-Route::post('/prosesCheckout', [PenjualanController::class, 'prosesCheckout'])->name('prosesCheckout');
-// Route::post('/prosesCheckout/tambah', [PenjualanController::class, 'prosesCheckoutTambah'])->name('prosesCheckoutTambah'); // Fix the route name and method
-Route::post('/cart/konfirmasi', [PenjualanController::class, 'konfirmasiCheckout'])->name('cart.konfirmasi');
-Route::post('/uploadToPenjualan', [PenjualanController::class, 'uploadToPenjualan'])->name('uploadToPenjualan');
+Route::post('/penjualan/confirmpenjualan', [PenjualanController::class, 'confirmpenjualan'])->name('confirmpenjualan');
+Route::get('/penjualan/riwayat', [PenjualanController::class, 'riwayatPenjualan'])->name('riwayatpenjualan');

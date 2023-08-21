@@ -53,6 +53,9 @@
 
     <!-- Vendors CSS -->
     <link rel="stylesheet" href="{{ asset('assets') }}/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+    <link rel="stylesheet" href="{{ asset('assets') }}/vendor/libs/apex-charts/apex-charts.css" />
+    <script src="{{ asset('assets') }}/vendor/libs/apex-charts/apexcharts.js"></script>
+
 
     <!-- Page CSS -->
 
@@ -167,6 +170,12 @@
                 <div data-i18n="Support">Penjualan</div>
               </a>
             </li>
+            <li class="menu-item @yield('riwayat_active')">
+                <a href="{{ route('riwayatpenjualan') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-file"></i>
+                <div data-i18n="Support">Riwayat</div>
+              </a>
+            </li>
           </ul>
         </aside>
         <!-- / Menu -->
@@ -184,8 +193,7 @@
               <!-- Search -->
               <div class="navbar-nav align-items-center">
                 <div class="nav-item d-flex align-items-center">
-                  <i class="bx bx-search fs-4 lh-0"></i>
-                  <input type="text" class="form-control border-0 shadow-none" placeholder="Search..." aria-label="Search...">
+                  <div id="clock"></div>
                 </div>
               </div>
               <!-- /Search -->
@@ -215,6 +223,30 @@
     </div>
     <!-- / Layout wrapper -->
 
+    <script>
+      function updateClock() {
+        const now = new Date();
+        const days = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', "Jum'at", 'Sabtu'];
+        const months = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Augustus', 'September',
+          'Oktober', 'November', 'Desember'
+        ];
+
+        const day = days[now.getDay()];
+        const date = now.getDate();
+        const month = months[now.getMonth()];
+        const year = now.getFullYear();
+
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        const seconds = String(now.getSeconds()).padStart(2, '0');
+
+        const clockDiv = document.getElementById('clock');
+        clockDiv.innerHTML = `${day}, ${date} ${month} ${year} - ${hours}:${minutes}:${seconds}`;
+      }
+
+      // Update clock every second
+      setInterval(updateClock, 1000);
+    </script>
     <!-- Core JS -->
     <!-- build:js assets/vendor/js/core.js -->
     <script src="{{ asset('assets') }}/vendor/libs/popper/popper.js"></script>
@@ -222,6 +254,8 @@
     <script src="{{ asset('assets') }}/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
 
     <script src="{{ asset('assets') }}/vendor/js/menu.js"></script>
+
+    {{-- APex --}}
     <!-- endbuild -->
 
     <!-- Vendors JS -->

@@ -38,33 +38,62 @@
             </tr>
           </thead>
           <tbody class="table-border-bottom-0">
-          @foreach ($produk as $item)
-    <tr>
-        <td>{{ $item->nama }}</td>
-        <td>{{ $item->stok }} {{ $item->satuan }}</td>
-        <td>@currency($item->harga_beli)</td>
-        <td>@currency($item->harga_jual)</td>
-        <td>
-            @if ($item->stok == 0)
-                <span class="badge bg-label-danger">Habis</span>
-            @elseif($item->stok < 5)
-                <span class="badge bg-label-warning">Menipis</span>
-            @else
-                <span class="badge bg-label-success">Tersedia</span>
-            @endif
-        </td>
-        <td>
-            <a href="{{ route('produk-show', $item->id) }}" class="btn btn-md btn-info">Detail</a>
-            <a href="{{ route('produk-edit', $item->id) }}" class="btn btn-md btn-warning">Edit</a>
-            <form action="{{ route('produk-destroy', $item->id) }}" method="POST" class="d-inline">
-                @csrf
-                @method('DELETE')
-                <button type="submit" class="btn btn-md btn-danger">Delete</button>
-            </form>
-        </td>
-    </tr>
-@endforeach
+            @foreach ($produk as $item)
+              <tr>
+                <td>{{ $item->nama }}</td>
+                <td>{{ $item->stok }} {{ $item->satuan }}</td>
+                <td>@currency($item->harga_beli)</td>
+                <td>@currency($item->harga_jual)</td>
+                <td>
+                  @if ($item->stok == 0)
+                    <span class="badge bg-label-danger">Habis</span>
+                  @elseif($item->stok < 5)
+                    <span class="badge bg-label-warning">Menipis</span>
+                  @else
+                    <span class="badge bg-label-success">Tersedia</span>
+                  @endif
+                </td>
+                <td>
+                  <a href="{{ route('produk-edit', $item->id) }}" class="btn btn-md btn-warning">Edit</a>
+                  {{-- <form action="{{ route('produk-destroy', $item->id) }}" method="POST" class="d-inline">
+                    @csrf
+                    @method('DELETE') --}}
+                  <button type="submit" class="btn btn-md btn-danger" data-bs-toggle="modal"
+                    data-bs-target="#modalCenter"
+                    onclick="delete_produk({{ $item->id }}, `{{ route('produk-destroy', $item->id) }}`)">Delete</button>
+                  {{-- </form> --}}
+                </td>
+              </tr>
+            @endforeach
 
+            <!-- Modal -->
+            <div class="modal fade" id="modalCenter" tabindex="-1" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h4 class="modal-title" id="modalCenterTitle">Delete Produk</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="row">
+                      <div class="col mb-3">
+                        <h5 style="text-align: center;">Apakah Anda Yakin Akan Menghapus Produk Ini?</h5>
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                        Cancel
+                      </button>
+                      <form id="formDelete" method="post" action="">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger">Ya</button>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </tbody>
         </table>
       </div>
@@ -74,5 +103,11 @@
       $(document).ready(function() {
         $("#produkTable").DataTable()
       });
+
+      function delete_produk(id, url) {
+        console.log(url);
+        $('#modalCenter').modal('show');
+        $('#formDelete').attr('action', url);
+      }
     </script>
   @endsection

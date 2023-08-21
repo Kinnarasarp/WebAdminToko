@@ -21,7 +21,7 @@ return new class extends Migration
             $table->integer('quantity');
             $table->integer('harga');
             $table->integer('keuntungan');
-            $table->integer('total');
+            $table->integer('subtotal');
             $table->timestamps();
         });
     }
