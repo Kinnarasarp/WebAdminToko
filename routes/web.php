@@ -32,7 +32,6 @@ Route::delete('/produk/{id}/destroy', [ProdukController::class, 'destroy'])->nam
 Route::get('/stok', [StokController::class, 'index'])->name('stok');
 Route::post('/stok/detail', [StokController::class, 'detail'])->name('stok_detail');
 
-
 Route::get('/penjualan', [PenjualanController::class, 'index'])->name('penjualan');
 Route::post('/penjualan/cart', [PenjualanController::class, 'cart'])->name('cart');
 Route::post('/prosesCheckout', [PenjualanController::class, 'prosesCheckout'])->name('prosesCheckout');
