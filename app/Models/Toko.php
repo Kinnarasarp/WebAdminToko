@@ -5,12 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Stok extends Model
+class Toko extends Model
 {
     use HasFactory;
-
-    protected $fillable = [
-        'jumlah',
-        'produk_id'
-    ];
 }

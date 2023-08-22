@@ -17,85 +17,49 @@ class PenjualanController extends Controller
 
     public function cart(Request $request)
     {
-        if ($request->isMethod('post')) {
-            if (isset($request->produk_array) && !empty($request->produk_array)) {
-                $array_produks = json_decode($request->produk_array);
-
-                // Lakukan pengambilan data dari penjualan sebelumnya atau buat no_order baru
-                $previousPenjualan = Penjualan::latest('no_order')->first();
-                $no_order = $previousPenjualan ? $previousPenjualan->no_order + 1 : 1;
-
-                return view("cart", compact('array_produks', 'no_order'));
-            } else {
-                return redirect()->route('penjualan')->with('error', 'Pilih Salah Satu Produk !');
-            }
-        } else {
-            return redirect()->route('penjualan')->with('error', 'Metode yang digunakan tidak didukung.');
-        }
-    }
-
-
-    public function prosesCheckout(Request $request)
-    {
-        try {
-            $noOrder = $request->input('no_order');
-            $produkIds = $request->input('produk_id');
-            $hargas = $request->input('harga');
-            $keuntungans = $request->input('keuntungan');
-            $totals = $request->input('total');
-
-            // Simpan transaksi
-            $this->simpanTransaksi($noOrder, $produkIds, $hargas, $keuntungans, $totals);
-
-            // Hitung dan update total pada penjualan
-            $this->updateTotalPenjualan($noOrder);
-
-            return redirect()->route('penjualan')->with('success', 'Transaksi berhasil.');
-        } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
-        }
-    }
-
-    public function konfirmasiCheckout(Request $request)
-    {
-        try {
-            $noOrder = $request->input('no_order');
+        if (!empty(json_decode($request->produk_array))) {
             $array_produks = json_decode($request->produk_array);
 
-            $totalHarga = 0;
-
-            foreach ($array_produks as $id) {
-                $item = Produk::find($id);
-                $totalHarga += $item->harga_jual;
-            }
-
-            $penjualan = Penjualan::where('no_order', $noOrder)->first();
-
-            return view('konfirmasi-checkout', compact('penjualan', 'array_produks', 'totalHarga'));
-        } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
+            return view("cart", compact('array_produks'));
+        } else {
+            return redirect()->route('penjualan')->with('error', 'Pilih Salah Satu Produk !');
         }
     }
 
-    public function uploadToPenjualan(Request $request)
+    public function confirmPenjualan(Request $request)
     {
-        try {
-            $produkId = $request->input('produk_id');
-            $jumlah = $request->input('jumlah');
-            $subtotal = $request->input('subtotal');
+        $penjualan = new Penjualan();
+        $penjualan->save();
 
-            // Create a new entry in the Penjualan table
-            $penjualan = new Penjualan();
-            $penjualan->produk_id = $produkId;
-            $penjualan->jumlah = $jumlah;
-            $penjualan->subtotal = $subtotal;
-            // You might need to adjust the above fields based on your table structure
+        $produk = $request->produk_id;
 
-            $penjualan->save();
+        foreach ($produk as $i => $value) {
+            $data = json_decode($value);
+            $transaksi = new Transaksi();
+            $transaksi->produk_id = $data->id;
+            $transaksi->penjualan_no_order = $penjualan->no_order;
+            $transaksi->quantity = intval($request->jumlah[$i]);
+            $transaksi->harga = intval($data->harga_jual);
+            $transaksi->keuntungan = intval($data->harga_jual) - intval($data->harga_beli);
+            $transaksi->subtotal = intval($request->jumlah[$i]) * intval($data->harga_jual);
+            $transaksi->save();
 
-            return redirect()->route('penjualan')->with('success', 'Produk berhasil ditambahkan ke dalam keranjang.');
-        } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
+            $produk = Produk::find($data->id);
+            $produk->stok = $produk->stok - intval($request->jumlah[$i]);
+            $produk->save();
         }
+
+        $penjualan->grand_total = intval($request->total);
+        $penjualan->save();
+
+
+
+        return redirect()->route('penjualan')->with('success', 'Transaksi Berhasil !');
+    }
+
+    public function riwayatPenjualan(Request $request)
+    {
+        $penjualanHistory = Penjualan::all();
+        return view('riwayat-penjualan', compact('penjualanHistory'));
     }
 }

@@ -43,16 +43,6 @@ class ProdukController extends Controller
         return redirect()->route('produk')->with('success', 'Produk Berhasil Ditambahkan!');
     }
 
-    public function show($id)
-    {
-        $produk = Produk::find($id);
-
-        if (!$produk) {
-            return redirect()->route('produk')->with('error', 'Produk tidak ditemukan.');
-        }
-        return view('produk-detail', compact('produk'));
-    }
-
     public function edit($id)
     {
         $produk = Produk::find($id);

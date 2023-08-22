@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Produk;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -10,53 +11,59 @@ class ProduksSeeder extends Seeder
 {
     public function run(): void
     {
-        DB::beginTransaction();
-        try {
-            $data = [
-                [
-                    'id' => 1,
-                    'nama' => 'Kopi ABC',
-                ],
-                [
-                    'id' => 2,
-                    'nama' => 'Indomie Goreng',
-                ],
-                [
-                    'id' => 3,
-                    'nama' => 'Indomie Kari',
-                ],
-                [
-                    'id' => 4,
-                    'nama' => 'POP ICE',
+        $data = [
+            [
+                'id' => 1,
+                'nama' => 'Kopi ABC',
+                'stok' => 8,
+                'satuan' => 'pcs',
+                'harga_beli' => 3000,
+                'harga_jual' => 4500,
+            ],
+            [
+                'id' => 2,
+                'nama' => 'Luwak Whiite Coffee',
+                'stok' => 8,
+                'satuan' => 'pcs',
+                'harga_beli' => 3000,
+                'harga_jual' => 4500,
+            ],
+            [
+                'id' => 3,
+                'nama' => 'Indomie Kari',
+                'stok' => 24,
+                'satuan' => 'pcs',
+                'harga_beli' => 3000,
+                'harga_jual' => 5000,
+            ],
+            [
+                'id' => 4,
+                'nama' => 'POP ICE',
+                'stok' => 7,
+                'satuan' => 'pcs',
+                'harga_beli' => 2000,
+                'harga_jual' => 3500,
+            ],
+            [
+                'id' => 5,
+                'nama' => 'Milo',
+                'stok' => 12,
+                'satuan' => 'pcs',
+                'harga_beli' => 2000,
+                'harga_jual' => 3500,
+            ],
+            [
+                'id' => 6,
+                'nama' => 'Teajus',
+                'stok' => 15,
+                'satuan' => 'pcs',
+                'harga_beli' => 1000,
+                'harga_jual' => 2000,
+            ]
+        ];
 
-                ],
-                [
-                    'id' => 5,
-                    'nama' => 'Milo',
-
-                ],
-                [
-                    'id' => 6,
-                    'nama' => 'Teajus',
-
-                ]
-            ];
-
-            foreach ($data as $key => $value) {
-                DB::table('produks')->updateOrInsert(['id' => $value['id']], [
-                    'nama' => $value['nama']
-                ]);
-            }
-
-            $lastId = DB::table('produks')->orderBy('id', 'desc')->first();
-            if (!empty($lastId)) {
-                $newLastId = $lastId->id + 1;
-                DB::update(DB::raw("ALTER SEQUENCE produks_id_seq RESTART WITH {$newLastId}"));
-            }
-            DB::commit();
-        } catch (\Exception $ex) {
-            DB::rollBack();
-            echo $ex->getMessage();
+        foreach ($data as $key => $value) {
+            Produk::create($value);
         }
     }
 }
