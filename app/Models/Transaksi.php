@@ -12,4 +12,9 @@ class Transaksi extends Model
         'produk_id', 'quantity', 'harga', 'keuntungan', 'total'
         // tambahkan atribut lain yang bisa diisi massal
     ];
+
+    public function produk()
+    {
+        return $this->belongsTo(Produk::class, 'produk_id');
+    }
 }

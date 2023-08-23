@@ -60,7 +60,7 @@
                     @method('DELETE') --}}
                   <button type="submit" class="btn btn-md btn-danger" data-bs-toggle="modal"
                     data-bs-target="#modalCenter"
-                    onclick="delete_produk({{ $item->id }}, `{{ route('produk-destroy', $item->id) }}`)">Delete</button>
+                    onclick="delete_produk('{{ $item->id }}', `{{ route('produk-destroy', $item->id) }}`)">Delete</button>
                   {{-- </form> --}}
                 </td>
               </tr>

@@ -4,6 +4,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PenjualanController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\StokController;
+use App\Http\Controllers\TokoController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -28,13 +29,18 @@ Route::get('/produk/{id}/edit', [ProdukController::class, 'edit'])->name('produk
 Route::put('/produk/{id}/update', [ProdukController::class, 'update'])->name('produk-update');
 Route::delete('/produk/{id}/destroy', [ProdukController::class, 'destroy'])->name('produk-destroy');
 
-<<<<<<< HEAD
+//stok
 Route::get('/stok', [StokController::class, 'index'])->name('stok');
 Route::post('/stok/detail', [StokController::class, 'detail'])->name('stok_detail');
 
-=======
->>>>>>> 3fd2cd5fced4960a29708bc1755d887e3555aebf
+//penjualan
 Route::get('/penjualan', [PenjualanController::class, 'index'])->name('penjualan');
 Route::post('/penjualan/cart', [PenjualanController::class, 'cart'])->name('cart');
 Route::post('/penjualan/confirmpenjualan', [PenjualanController::class, 'confirmpenjualan'])->name('confirmpenjualan');
-Route::get('/penjualan/riwayat', [PenjualanController::class, 'riwayatPenjualan'])->name('riwayatpenjualan');
+
+//riwayatPenjualan
+Route::get('/riwayat-penjualan', [PenjualanController::class, 'riwayatPenjualan'])->name('riwayatPenjualan');
+
+// Toko
+Route::get('/toko', [TokoController::class, 'index'])->name('toko');
+Route::post('/toko/store', [TokoController::class, 'store'])->name('toko-store');

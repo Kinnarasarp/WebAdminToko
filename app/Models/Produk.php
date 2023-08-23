@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model; 
+use Illuminate\Database\Eloquent\Model;
 
 class Produk extends Model
 {
@@ -19,6 +19,6 @@ class Produk extends Model
 
     public function penjualan()
     {
-        return $this->belongsToMany(Penjualan::class, 'penjualans', 'no_order');
+        return $this->belongsToMany(Penjualan::class, 'penjualan', 'produk_id', 'no_order');
     }
 }

@@ -52,14 +52,14 @@ class PenjualanController extends Controller
         $penjualan->grand_total = intval($request->total);
         $penjualan->save();
 
-
-
         return redirect()->route('penjualan')->with('success', 'Transaksi Berhasil !');
     }
 
-    public function riwayatPenjualan(Request $request)
+    public function riwayatPenjualan()
     {
-        $penjualanHistory = Penjualan::all();
-        return view('riwayat-penjualan', compact('penjualanHistory'));
+        $transaksiHistory = Transaksi::with('produk')->get();
+        // dd($transaksiHistory);
+        return view('riwayat-penjualan', compact('transaksiHistory'));
     }
+    
 }

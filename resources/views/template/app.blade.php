@@ -158,6 +158,13 @@
                 <div data-i18n="Analytics">Dashboard</div>
               </a>
             </li>
+             <!-- Tambahkan menu Toko di sini -->
+  <li class="menu-item @yield('toko_active')">
+    <a href="{{ route('toko') }}" class="menu-link">
+      <i class="menu-icon tf-icons bx bx-store"></i>
+      <div data-i18n="Toko">Toko</div>
+    </a>
+  </li>
             <li class="menu-item @yield('produk_active')">
               <a href="{{ route('produk') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-cube-alt"></i>
@@ -171,10 +178,10 @@
               </a>
             </li>
             <li class="menu-item @yield('riwayat_active')">
-                <a href="{{ route('riwayatpenjualan') }}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-file"></i>
-                <div data-i18n="Support">Riwayat</div>
-              </a>
+              <a href="{{ route('riwayatPenjualan') }}" class="menu-link">
+              <i class="menu-icon tf-icons bx bx-archive"></i>
+             <div data-i18n="Support">Riwayat</div>
+             </a>
             </li>
           </ul>
         </aside>
