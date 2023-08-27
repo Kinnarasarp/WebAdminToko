@@ -41,6 +41,6 @@ Route::post('/penjualan/confirmpenjualan', [PenjualanController::class, 'confirm
 //riwayatPenjualan
 Route::get('/riwayat-penjualan', [PenjualanController::class, 'riwayatPenjualan'])->name('riwayatPenjualan');
 
-// Toko
+// toko
 Route::get('/toko', [TokoController::class, 'index'])->name('toko');
 Route::post('/toko/store', [TokoController::class, 'store'])->name('toko-store');

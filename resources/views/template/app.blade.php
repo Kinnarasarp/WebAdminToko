@@ -32,7 +32,7 @@
     <meta name="description" content="" />
 
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="{{ asset('assets') }}/img/favicon/favicon.ico" />
+    <link rel="icon" type="image/x-icon" href="{{ asset('assets') }}/img/favicon/r6slogo.png" />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -118,13 +118,13 @@
                           <mask id="mask-2" fill="white">
                             <use xlink:href="#path-1"></use>
                           </mask>
-                          <use fill="#696cff" xlink:href="#path-1"></use>
+                          <use fill="#21db00" xlink:href="#path-1"></use>
                           <g id="Path-3" mask="url(#mask-2)">
-                            <use fill="#696cff" xlink:href="#path-3"></use>
+                            <use fill="#21db00" xlink:href="#path-3"></use>
                             <use fill-opacity="0.2" fill="#FFFFFF" xlink:href="#path-3"></use>
                           </g>
                           <g id="Path-4" mask="url(#mask-2)">
-                            <use fill="#696cff" xlink:href="#path-4"></use>
+                            <use fill="#21db00" xlink:href="#path-4"></use>
                             <use fill-opacity="0.2" fill="#FFFFFF" xlink:href="#path-4"></use>
                           </g>
                         </g>
@@ -132,7 +132,7 @@
                           id="Triangle"
                           transform="translate(19.000000, 11.000000) rotate(-300.000000) translate(-19.000000, -11.000000) "
                         >
-                          <use fill="#696cff" xlink:href="#path-5"></use>
+                          <use fill="#21db00" xlink:href="#path-5"></use>
                           <use fill-opacity="0.2" fill="#FFFFFF" xlink:href="#path-5"></use>
                         </g>
                       </g>
@@ -140,7 +140,7 @@
                   </g>
                 </svg>
               </span>
-              <span class="app-brand-text demo menu-text fw-bolder ms-2">Admin</span>
+              <span class="app-brand-text demo menu-text fw-bolder ms-2">WebToko</span>
             </a>
 
             <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">

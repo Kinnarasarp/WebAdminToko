@@ -6,21 +6,8 @@
 
 @section('content')
   <div class="d-flex flex-column justify-content-between h-100">
-    @if (Session::has('error'))
-      <div class="alert alert-danger alert-dismissible" role="alert">
-        {{ session('error') }}
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-      </div>
-    @endif
-    @if (Session::has('success'))
-      <div class="alert alert-success alert-dismissible" role="alert">
-        {{ session('success') }}
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-      </div>
-    @endif
-    {{-- @dd(count($produk)) --}}
     @if (count($produk) != 0)
-      <div class="row m-0" style="overflow-y: auto; overflow-x: hidden; height: 73vh;">
+      <div class="row m-0" style="overflow-y: auto; overflow-x: hidden;">
         @foreach ($produk as $item)
           <div class="col-3 p-0">
             <div class="card mx-2 text-center mb-3">
@@ -44,18 +31,27 @@
       <div class="alert alert-warning" role="alert">Tidak Ada Produk Tersedia !</div>
     @endif
 
-    <footer class="w-auto footer p-3 bg-white" style="border-radius: 15px; position: sticky;">
-      <div class="d-flex justify-content-between align-items-center">
-        <div class="produk-selected">
-          <p class="m-0" id="item-selected">0 Produk Terplih</p>
+    <div class="">
+      @if (Session::has('error'))
+        <div class="alert alert-danger alert-dismissible" role="alert">
+          {{ session('error') }}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
-        <form action="{{ route('cart') }}" method="POST">
-          @csrf
-          <input type="hidden" id="produk_array" name="produk_array" value="">
-          <button class="btn btn-primary" id="submit" type="submit">Next</button>
-        </form>
-      </div>
-    </footer>
+      @endif
+
+      <footer class="w-auto footer p-3 bg-white" style="border-radius: 15px; position: sticky;">
+        <div class="d-flex justify-content-between align-items-center">
+          <div class="produk-selected">
+            <p class="m-0" id="item-selected">0 Produk Terplih</p>
+          </div>
+          <form action="{{ route('cart') }}" method="POST">
+            @csrf
+            <input type="hidden" id="produk_array" name="produk_array" value="">
+            <button class="btn btn-primary" id="submit" type="submit">Next</button>
+          </form>
+        </div>
+      </footer>
+    </div>
   </div>
 
   <script>

@@ -33,6 +33,7 @@
               <th>Stok</th>
               <th>Harga Beli</th>
               <th>Harga Jual</th>
+              <th>Keuntungan</th>
               <th>Status</th>
               <th>Action</th>
             </tr>
@@ -44,6 +45,7 @@
                 <td>{{ $item->stok }} {{ $item->satuan }}</td>
                 <td>@currency($item->harga_beli)</td>
                 <td>@currency($item->harga_jual)</td>
+                <td>@currency($item->harga_jual - $item->harga_beli)</td>
                 <td>
                   @if ($item->stok == 0)
                     <span class="badge bg-label-danger">Habis</span>
@@ -81,13 +83,13 @@
                       </div>
                     </div>
                     <div class="modal-footer">
-                      <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                      <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
                         Cancel
                       </button>
                       <form id="formDelete" method="post" action="">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn btn-danger">Ya</button>
+                        <button type="submit" class="btn btn-success">Ya</button>
                       </form>
                     </div>
                   </div>

@@ -40,7 +40,7 @@ class PenjualanController extends Controller
             $transaksi->penjualan_no_order = $penjualan->no_order;
             $transaksi->quantity = intval($request->jumlah[$i]);
             $transaksi->harga = intval($data->harga_jual);
-            $transaksi->keuntungan = intval($data->harga_jual) - intval($data->harga_beli);
+            $transaksi->keuntungan = (intval($data->harga_jual) - intval($data->harga_beli)) * $transaksi->quantity;
             $transaksi->subtotal = intval($request->jumlah[$i]) * intval($data->harga_jual);
             $transaksi->save();
 
@@ -52,14 +52,14 @@ class PenjualanController extends Controller
         $penjualan->grand_total = intval($request->total);
         $penjualan->save();
 
-        return redirect()->route('penjualan')->with('success', 'Transaksi Berhasil !');
+        return redirect()->route('riwayatPenjualan')->with('success', 'Transaksi Berhasil !');
     }
 
     public function riwayatPenjualan()
     {
-        $transaksiHistory = Transaksi::with('produk')->get();
-        // dd($transaksiHistory);
+        $transaksiHistory = Transaksi::with(array('produk' => function ($query) {
+            $query->withTrashed();
+        }))->get();
         return view('riwayat-penjualan', compact('transaksiHistory'));
     }
-    
 }

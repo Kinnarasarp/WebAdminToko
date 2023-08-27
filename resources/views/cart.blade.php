@@ -45,13 +45,15 @@
                       <td>{{ $item->nama }}</td>
                       <td id="stok_{{ $item->id }}" data-stok="{{ $item->stok }}">{{ $item->stok }}</td>
                       <td>{{ $item->satuan }}</td>
-                      <td>{{ $item->harga_jual }}</td>
+                      <td>@currency($item->harga_jual)</td>
                       <td class="d-flex justify-content-center" style="gap: 10px;">
                         <input type="number" name="jumlah[]" value="1" min="1" max="{{ $item->stok }}"
                           class="form-control" id="qty-input_{{ $item->id }}"
                           onchange="updateSubtotal(this, '{{ $item->harga_jual }}', '{{ $item->id }}')">
                       </td>
-                      <td class="subtotal">{{ $subtotal }}</td>
+                      <td>@currency($subtotal)</td>
+                      <input type="hidden" class="subtotal" id="hidden_subtotal_{{ $item->id }}"
+                        value="{{ $subtotal }}">
                     </tr>
                     <input type="hidden" name="produk_id[]" value="{{ $item }}">
                   @endforeach
@@ -102,22 +104,25 @@
         if ((value !== '') && (value.indexOf('.') === -1)) {
           $(input).val(Math.max(Math.min(value, stok), -stok));
         }
-        console.log(stok);
         var jumlah = input.value;
         var subtotal = jumlah * harga;
+        $('#hidden_subtotal_' + id).val(subtotal);
 
-        input.parentNode.nextElementSibling.innerHTML = subtotal;
+        input.parentNode.nextElementSibling.innerHTML = 'Rp' + subtotal.toLocaleString('id-ID');
       });
     }
 
     $('#konfirmasi').click(function(e) {
       e.preventDefault();
-      var subtotal = document.querySelectorAll('.subtotal')
+      var subtotal = document.querySelectorAll('.subtotal');
       var total = 0;
 
       $.each(subtotal, function(indexInArray, element) {
-        total += parseFloat(element.childNodes[0].data)
+        total += parseFloat(element.value);
+        console.log(element.value);
       });
+
+      console.log(total);
 
       $('#totalharga').val('Rp' + total.toLocaleString('id-ID'));
       $('#totalharga1').val(total);

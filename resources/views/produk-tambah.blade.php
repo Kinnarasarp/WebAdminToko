@@ -31,14 +31,15 @@
             <div class="row mb-3">
               <label class="col-sm-2 col-form-label" for="nama">Nama</label>
               <div class="col-sm-10">
-                <input type="text" class="form-control" id="nama" name="nama"
+                <input type="text" class="form-control" required id="nama" name="nama"
                   placeholder="Contoh : Tepung Terigu">
               </div>
             </div>
             <div class="row mb-3">
               <label class="col-sm-2 col-form-label" for="stok">Stok</label>
               <div class="col-sm-10">
-                <input type="text" class="form-control" id="stok" name="stok" placeholder="Contoh : 3">
+                <input type="text" class="form-control" required id="stok" name="stok"
+                  placeholder="Contoh : 3">
               </div>
             </div>
             <div class="row mb-3">
@@ -55,13 +56,15 @@
             <div class="row mb-3">
               <label class="col-sm-2 col-form-label" for="harga_beli">Harga Beli</label>
               <div class="col-sm-10">
-                <input type="text" class="form-control" id="harga_beli" name="harga_beli" placeholder="Contoh : 5000">
+                <input type="text" class="form-control" required id="harga_beli" name="harga_beli"
+                  placeholder="Contoh : 5000">
               </div>
             </div>
             <div class="row mb-3">
               <label class="col-sm-2 col-form-label" for="harga_jual">Harga Jual</label>
               <div class="col-sm-10">
-                <input type="text" class="form-control" id="harga_jual" name="harga_jual" placeholder="Contoh : 7000">
+                <input type="text" class="form-control" required id="harga_jual" name="harga_jual"
+                  placeholder="Contoh : 7000">
               </div>
             </div>
             <div class="row justify-content-end">

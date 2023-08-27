@@ -18,6 +18,7 @@ return new class extends Migration
             $table->enum('satuan', ['liter', 'kg', 'pcs']);
             $table->integer('harga_beli');
             $table->integer('harga_jual');
+            $table->timestamp('deleted_at')->nullable();
             $table->timestamps();
         });
     }
